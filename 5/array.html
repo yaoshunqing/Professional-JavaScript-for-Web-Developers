@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//两种方式创建数组
+			var colors = new Array(20, "red", "blue");
+			var colors = [20, "red", "blue"];
+
+			console.log(colors.length); //3
+			//注意.length不是只读的，设置这个属性可以添加或移除内容
+			colors.length = 2;
+			//console.log(colors);//没了blue
+
+			//检测数组使用isArray()
+			if (Array.isArray(colors)) {
+				console.log("Yes");
+			}
+
+			var colors = ["red", "blue", "green"];
+			console.log(colors.toString());
+			// console.log(colors.valueOf());//["red", "blue", "green"]
+
+			var person1 = {
+				toLocaleString: function() {
+					return "Nikolas";
+				},
+				toString: function() {
+					return "Nicholas";
+				}
+			}
+			console.log(person1.toLocaleString());
+			console.log(person1.toString());
+			//join方法连接数组内容
+			console.log(colors.join('|')) //red|blue|green
+
+			//push pop 数组可以看成栈
+			var colors = ['red', 'blue', 'green'];
+			colors.push('brown');
+			colors[3] = 'black';
+			console.log(colors.pop());
+
+			//push shift 数组看成队列
+			var colors = ['red', 'blue', 'green'];
+			colors.push('brown');
+			colors[3] = 'black';
+			console.log(colors.shift());
+
+			//unshift pop 向数组前端添加项,末端移除，反向队列
+			var colors = ['red', 'blue', 'green'];
+			colors.unshift('brown');
+			console.log(colors.pop());
+
+			//排序方法
+			var values = [1, 2, 3, 4, 5];
+			values.reverse(); //翻转
+			console.log(values); // 54321
+			
+			var values = [0, 1, 5, 10, 15];
+			values.sort();//sort方法会调用toString方法转换每一项后比较字符串以确定排序
+			//console.log(values); //0, 1, 10, 15, 5
+			
+			//升序排列
+			function compareUp(v1, v2){
+				if (v1 > v2){
+					return 1;
+				}else if (v1 < v2){
+					return -1;
+				}else if (v1 == v2) {
+					return 0;
+				}
+			}
+			
+			//降序排列
+			function compareDown(v1, v2){
+				if (v1 > v2){
+					return -1;
+				}else if (v1 < v2){
+					return 1;
+				}else{
+					return 0;
+				}
+			}
+			
+			//最简易升序写法
+			function compare(v1, v2){
+				return v1 - v2;
+			}
+			
+			values.sort(compareUp);
+			//console.log(values);//[0, 1, 5, 10, 15]
+			values.sort(compareDown);
+			//console.log(values);//[15, 10, 5, 1, 0]
+			values.sort(compare);
+			//console.log(values);//[0, 1, 5, 10, 15]
+			
+			
+			
+		</script>
+	</body>
+</html>

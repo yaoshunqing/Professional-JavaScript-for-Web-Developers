@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			var color = "blue";
+			// function changeColor(color0){
+			// 	//能够识别全局环境变量，因为也在该函数作用域链内
+			// 	if (color == 'blue'){
+			// 		color = 'red';
+			// 	}else {
+			// 		color = 'blue';
+			// 	}
+			// }
+			// changeColor();
+			// console.log(color);//red，因为函数直接修改了全局变量color
+			
+			function changeColor0(color){
+				//这样就不会，因为color变为了传入值的形式参数
+				if (color == 'blue'){
+					color = 'red';
+				}else {
+					color = 'blue';
+				}
+			}
+			
+			changeColor0();
+			console.log(color);//blue，与定义一致
+			
+			var color0 = 'blue';
+			
+			function changeColor(){
+				var anotherColor = "red";
+				
+				function swapColors(){
+					var tempColor = anotherColor;
+					anotherColor = color;
+					color = tempColor;
+					//这里可以访问color、anotherColor和tempColor
+				}
+				//这里可以访问color、anotherColor，但不能访问tempColor
+				swapColors();
+				
+			}
+			//这里只能访问color
+			changeColor();
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>
