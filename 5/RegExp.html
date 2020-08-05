@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				background-color: black;
+				color:white;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<script type="text/javascript">
+			//Regular Expression RegExp
+			var expression = /at/g; //   var x = /正则表达式/标志 字面量表示
+			var expression1 = new RegExp('at', 'g'); //字符串表示
+			// /\w\\hello\\123/ == "\\w\\\\hello\\\\123"
+			//因为\反斜杠在字符串内需要转译，否则为invalid
+			// console.log('\')
+			
+			var text = "cat, bat, sat";
+			var pattern1 = new RegExp(".at", 'g');
+			var pattern2 = new RegExp(".at");
+			
+			console.log(pattern1.lastIndex); //0
+			console.log(pattern1.exec(text)); //cat
+			console.log(pattern1.exec(text).index); //5 bat
+			console.log(pattern1.exec(text)); //sat
+			//非全局模式时每次都从头开始
+			console.log(pattern2.exec(text));//cat
+			console.log(pattern2.exec(text).index); //0 cat
+			console.log(pattern2.exec(text));//cat
+			
+			//test为判断某个字符串是否与模式匹配
+			var text1 = "000-00-0000";
+			var pattern = /\d{3}-\d{2}-\d{4}/;
+			
+			if(pattern.test(text1)){
+				console.log('Yes,Yes,Yes!');
+			}
+			
+			var text2 = "this is a short summer!";
+			var pattern3 = /(.)hort/g;
+			if (pattern3.test(text2)){
+				console.log(RegExp.input); //this is a short summer!
+				console.log(RegExp.$_); //this is a short summer!
+				console.log(RegExp.leftContext);//this is a 
+				console.log(RegExp["$`"]);//this is a 
+				console.log(RegExp.lastMatch);//short
+				console.log(RegExp["$&"]);//this is a
+				console.log(RegExp.lastParen);//s
+				
+			}
+			
+			var text3 = "short";
+			var pattern4 = /(..)or(.)/g;
+			if (pattern4.test(text3)){
+				//获取捕获组
+				console.log(RegExp.$1); //sh
+				console.log(RegExp.$2); //t
+			}
+			
+			var pattern5 = /\d\d\d/;
+			var text = "123";
+			console.log(pattern5.exec(text));
+			
+			
+		</script>
+	</body>
+</html>

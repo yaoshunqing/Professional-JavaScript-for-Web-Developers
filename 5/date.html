@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				background-color: black;
+				color:white;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var now = new Date(Date.parse('01 Jan 1970 00:00:00 GMT'));
+			var now1 = new Date(2020, 0);
+			
+			console.log(Date.parse('01 Jan 1970 00:00:00 GMT'));
+			console.log(Date.now());
+			
+			//注意到月份从0计数
+			var date1 = new Date(2007, 0, 1); //2007.1.1
+			var date2 = new Date(2007, 1, 1); //2007.2.1
+			
+			console.log(date1 < date2);
+			
+			
+		</script>
+	</body>
+</html>

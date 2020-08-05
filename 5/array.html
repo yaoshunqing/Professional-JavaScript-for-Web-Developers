@@ -3,26 +3,35 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
+		<style type="text/css">
+			body {
+				background-color: black;
+				color:white;
+			}
+		</style>
 	</head>
 	<body>
-
+		<p>点击按钮列出数组的每个元素。</p>
+		<button onclick="numbers.forEach(myFunction)">点我</button>
+		<p id="demo"></p>
+		
 		<script type="text/javascript">
 			//两种方式创建数组
 			var colors = new Array(20, "red", "blue");
 			var colors = [20, "red", "blue"];
 
-			console.log(colors.length); //3
+			//console.log(colors.length); //3
 			//注意.length不是只读的，设置这个属性可以添加或移除内容
 			colors.length = 2;
 			//console.log(colors);//没了blue
 
 			//检测数组使用isArray()
 			if (Array.isArray(colors)) {
-				console.log("Yes");
+				//console.log("Yes");
 			}
 
 			var colors = ["red", "blue", "green"];
-			console.log(colors.toString());
+			//console.log(colors.toString());
 			// console.log(colors.valueOf());//["red", "blue", "green"]
 
 			var person1 = {
@@ -33,73 +42,157 @@
 					return "Nicholas";
 				}
 			}
-			console.log(person1.toLocaleString());
-			console.log(person1.toString());
+			//console.log(person1.toLocaleString());
+			//console.log(person1.toString());
 			//join方法连接数组内容
-			console.log(colors.join('|')) //red|blue|green
+			//console.log(colors.join('|')) //red|blue|green
 
 			//push pop 数组可以看成栈
 			var colors = ['red', 'blue', 'green'];
 			colors.push('brown');
 			colors[3] = 'black';
-			console.log(colors.pop());
+			//console.log(colors.pop());
 
 			//push shift 数组看成队列
 			var colors = ['red', 'blue', 'green'];
 			colors.push('brown');
 			colors[3] = 'black';
-			console.log(colors.shift());
+			//console.log(colors.shift());
 
 			//unshift pop 向数组前端添加项,末端移除，反向队列
 			var colors = ['red', 'blue', 'green'];
 			colors.unshift('brown');
-			console.log(colors.pop());
+			//console.log(colors.pop());
 
 			//排序方法
 			var values = [1, 2, 3, 4, 5];
 			values.reverse(); //翻转
-			console.log(values); // 54321
-			
+			//console.log(values); // 54321
+
 			var values = [0, 1, 5, 10, 15];
-			values.sort();//sort方法会调用toString方法转换每一项后比较字符串以确定排序
+			values.sort(); //sort方法会调用toString方法转换每一项后比较字符串以确定排序
 			//console.log(values); //0, 1, 10, 15, 5
-			
+
 			//升序排列
-			function compareUp(v1, v2){
-				if (v1 > v2){
+			function compareUp(v1, v2) {
+				if (v1 > v2) {
 					return 1;
-				}else if (v1 < v2){
+				} else if (v1 < v2) {
 					return -1;
-				}else if (v1 == v2) {
+				} else if (v1 == v2) {
 					return 0;
 				}
 			}
-			
+
 			//降序排列
-			function compareDown(v1, v2){
-				if (v1 > v2){
+			function compareDown(v1, v2) {
+				if (v1 > v2) {
 					return -1;
-				}else if (v1 < v2){
+				} else if (v1 < v2) {
 					return 1;
-				}else{
+				} else {
 					return 0;
 				}
 			}
-			
+
 			//最简易升序写法
-			function compare(v1, v2){
+			function compare(v1, v2) {
 				return v1 - v2;
 			}
-			
+
 			values.sort(compareUp);
 			//console.log(values);//[0, 1, 5, 10, 15]
 			values.sort(compareDown);
 			//console.log(values);//[15, 10, 5, 1, 0]
 			values.sort(compare);
 			//console.log(values);//[0, 1, 5, 10, 15]
+			var colors = ['red', 'blue'];
+			var colors2 = colors.concat('green', ['brown'], [
+				['pink', 'purple']
+			]);
+			//console.log(colors2); // ["red","blue","green","brown",["pink","purple"]]
+
+
+			//console.log([1] + [2,3] + [[2,3]]);//12,32,3 转为string类型再加
+
+			//concat和slice都不会影响原视数组
+			var colors3 = colors2.slice(0, 3);
+			var colors4 = colors2.slice(-5, -2);
+			//console.log(colors3, colors4);// ["red","blue","green"] ["red","blue","green"]
+
+			//splice能够删除，插入，替换数组内容
+			var colors = ['red', 'blue', 'green'];
+			var removed = colors.splice(0, 1); //指定要删除的位置和要删除的项数，从位置0删除1项，即删除第一项
+			//console.log(colors);//["blue","green"]
+			var colors = ['red', 'blue', 'green'];
+			var inserted = colors.splice(1, 0, 'yellow', 'orange'); //从位置1开始插入两项
+			//console.log(colors);//["red","yellow","orange","blue","green"]
+			var colors = ['red', 'blue', 'green'];
+			var inserted = colors.splice(1, 1, 'yellow', 'orange'); //先从位置1开始删除一项，然后插入两项
+			//console.log(colors);//["red","yellow","orange","green"]
+
+			//定位
+			var numbers = [1, 2, 3, 4, 4, 4];
+			console.log(numbers.indexOf(4)); //4在数组中的位置是3
+			console.log(numbers.indexOf(4, 2)); //第二个参数为从第几位开始查找，从第二位开始找第一个4在数组中的位置是3
+			console.log(numbers.lastIndexOf(4)); //最后一个4在数组中的位置是5
+
+
+			//迭代，每个方法都接收两个参数：要在每一项上运行的函数和运行该函数的作用域对象
+			//传入函数会接收三个参数，数组项的值，该项在数组中的位置和数组对象本身
+
+			var numbers = [1, 2, 3, 4, 5];
+			var result = numbers.every(function(item, index, array){
+				return (item > 2);
+			})
+			var result1 = numbers.some(function(item, index, array){
+				return (item > 2);
+			})
+			//console.log(result); //false，不是所有值都大于2
+			//console.log(result1); //true, 存在大于2的值
+			
+			var numbers = [1, 2, 3, 4, 5];
+			var result = numbers.filter(function(item, index, array){
+				return (item > 2);
+			})
+			//console.log(result); //[3,4,5]
+			
+			var result = numbers.map(function(item, index, array){
+				return (item * 2);
+			})
+			//console.log(result); //[2,4,6,8,10]
+			
+			var result = 0;
+			numbers.forEach(function(item, index, array){
+				result += item;
+			})
+			//console.log(result); //15
+			
+			
+			demoP = document.getElementById("demo");
+			var numbers = [4, 9, 16, 25];
+			
+			function myFunction(item, index) {
+			    demoP.innerHTML = demoP.innerHTML + "index[" + index + "]: " + item + "<br>"; 
+			}
+			
+			//归并
+			var values = [1, 2, 3, 4, 5];
+			var sum = values.reduce(function (prev, cur, index, array){
+				return prev + cur;
+			})
+			console.log(sum);
+			
+			var values = [1, 2, 3, 4, 5];
+			var sum = values.reduceRight(function (prev, cur, index, array){
+				return prev + cur;
+			})
+			console.log(sum);
 			
 			
 			
 		</script>
+		
+		
 	</body>
 </html>

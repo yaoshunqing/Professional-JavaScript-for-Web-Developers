@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				background-color: black;
+				color:white;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function sum(num1, num2){
+				return num1 + num2;
+			}
+			//函数表达式定义函数
+			var sum = function (num1, num2){
+				return num1 + num2;
+			};
+			
+			// var nums = [1,3,0,2,9,5];
+			// nums.sort(function(a,b){
+			// 	return a - b;
+			// })
+			// console.log(nums)
+			
+			//对象数组排序，使用函数中返回函数
+			
+			function createComparison(propertyName) {
+				return function(object1, object2){
+					var value1 = object1[propertyName];
+					var value2 = object2[propertyName];
+					return value1 - value2;
+				}
+			}
+			
+			var data = [{name:'yao', age:28}, {name:'nao', age:23}];
+			data.sort(createComparison("name"));
+			//注意如果是data的话，则运行两次排序输出结果一致，怀疑跟内存有关
+			//console.log(data[0]);//{"age":28,"name":"yao"}
+			data.sort(createComparison("age"));
+			//console.log(data[0]);//{"age":23,"name":"nao"}
+			
+			//递归写法
+			function factorial(num){
+				if(num <= 1){
+					return 1;
+				} else {
+					// return num * factorial(num - 1);
+					return num * arguments.callee(num - 1);
+				}
+			}
+			//这样可以改变引用名字而避免因为后续修改原函数名造成错误
+			var trueFactorial = factorial;
+			factorial = function(num){
+				return 0;
+			}
+			console.log(trueFactorial(3));
+			
+			//this的作用域
+			window.color = 'red';
+			var o = {'color':'blue'};//注意对象属性名是字符串时加引号与否无影响，但是数字时一定要加
+			
+			function sayColor(){
+				console.log(this.color);
+			}
+			sayColor();//red
+			o.sayColor = sayColor;
+			o.sayColor();//blue
+			
+			//函数方法
+			function sum(num1, num2){
+				return num1 + num2;
+			}
+			
+			function callsum1(num1, num2){
+				return sum.apply(this, arguments);
+				//return sum.apply(this, [num1, num2]);
+			}
+			
+			function callsum2(num1, num2){
+				return sum.call(this, num1, num2);
+			}
+			
+			console.log(callsum1(10,10));//20
+			console.log(callsum2(10,10));//20
+			
+			//apply和call真实作用
+			window.color = 'red';
+			var o = {color:'blue'};
+			
+			function sayColor(){
+				console.log(this.color);
+			}
+			
+			sayColor();
+			sayColor.call(this);//red
+			sayColor.call(window);//red
+			sayColor.call(o);//blue
+			
+			var objectSayColor = sayColor.bind(o);
+			// var objectSayColor = sayColor.call(o);
+			objectSayColor();//blue
+			
+			
+		</script>
+	</body>
+</html>
