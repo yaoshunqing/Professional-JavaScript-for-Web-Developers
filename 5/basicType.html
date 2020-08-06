@@ -11,5 +11,89 @@
 		</style>
 	</head>
 	<body>
+		<script type="text/javascript">
+			//调用基本包装类型构造函数与直接调用同名转型函数是不一样的
+			var value = "25";
+			var number = Number(value);
+			console.log(typeof number);//number
+			
+			var obj = new Number(value);
+			console.log(typeof obj);//object
+			
+			var num = 10, num1 = 10.005, num2 = 100;
+			console.log(num.toFixed(2));//10.00
+			console.log(num1.toFixed(2));//10.01
+			console.log(num2.toExponential(1));//1.0e+2
+			//toPrecision方法可以得到最合适的格式
+			var num = 99;
+			console.log(num.toPrecision(1));//1e+2
+			console.log(num.toPrecision(2));//99
+			console.log(num.toPrecision(3));//99.0
+			
+			//string
+			var stringValue = "hello world";
+			console.log(stringValue.length);//11
+			console.log(stringValue.charAt(1));//e
+			console.log(stringValue[1]);//e
+			console.log(stringValue.charCodeAt(1));//101
+			
+			var stringValue = "hello";
+			var result = stringValue.concat("world");
+			console.log(result);//helloworld
+			
+			//slice() substr() substring()均返回一个子字符串且对原始字符串没有任何影响
+			var stringValue = "hello world";
+			console.log(stringValue.slice(3));//lo world
+			console.log(stringValue.substr(3));//lo world
+			console.log(stringValue.substring(3));//lo world
+			console.log(stringValue.slice(3, 7));//lo w 第二个参数指定要返回的结尾位置
+			console.log(stringValue.substr(3, 7));//lo worl 因为它的第二个参数指定要返回的字符串个数
+			console.log(stringValue.substring(3, 7));//lo w
+			
+			console.log(stringValue.indexOf("o"));//4
+			console.log(stringValue.lastIndexOf("o"));//7
+			
+			//循环找到所有匹配
+			var stringValue = "Lorem ipsum dolor sit amet, consectetur adipisicing elit";
+			var position = new Array();
+			var pos = stringValue.indexOf('e');
+			
+			while(pos > -1){
+				position.push(pos);
+				pos = stringValue.indexOf('e', pos + 1);
+			}
+			//console.log(position);//[3,24,32,35,52]
+			
+			//trim删除前后空格
+			var s = '  aa  ';
+			console.log(s.trim());
+			console.log(s.toLowerCase());//   aa
+			console.log(s.toUpperCase());//   AA
+			
+			//模式匹配
+			var text = 'cat, bat, sat';
+			var pattern = /.at/;
+			
+			var matches = text.match(pattern);//pattern.exec(text)相同
+			console.log(matches.index);
+			console.log(matches[0]);
+			console.log(pattern.lastIndex);
+			
+			//search返回第一个匹配项的索引
+			var text = "cat, bat, sat";
+			var pos = text.search(/at/);
+			console.log(pos);//1
+			
+			result = text.replace(/(.at)/g, 'ond($1)');
+			console.log(result);//cond(cat),bond(bat),sond(sat)
+			
+			//split分隔
+			var colorTxt = "red,blue,pink";
+			console.log(colorTxt.split(','));//["red","blue","pink"]
+			
+			console.log(String.fromCharCode(104, 101, 108));//hel
+			
+			
+		</script>
 	</body>
 </html>

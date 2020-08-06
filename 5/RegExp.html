@@ -62,9 +62,10 @@
 				console.log(RegExp.$2); //t
 			}
 			
-			var pattern5 = /\d\d\d/;
-			var text = "123";
-			console.log(pattern5.exec(text));
+			var pattern5 = /\d\d\d/g;
+			var text = "123,456";
+			console.log(text.match(pattern5));//["123","456"]
+			console.log(pattern5.exec(text));//["123"]
 			
 			
 		</script>
