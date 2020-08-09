@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				background-color: black;
+				color:white;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//encodeURI()  encodeURIComponent()
+			
+			var msg = "hello world";
+			eval("console.log(msg)");
+			
+			var c = 'red';
+			function color(){
+				console.log(window.c);
+			}
+			color();
+			
+			var nums = [1,2,3,31,0];
+			
+			console.log(Math.max(1,2,3));
+			console.log(Math.max.apply(null, nums));
+			console.log(Math.min.apply(Math, nums));
+			
+			console.log(Math.ceil(25.9));//向上舍入 26
+			console.log(Math.ceil(25.1));//26
+			console.log(Math.floor(25.9));//向下舍入 25
+			console.log(Math.round(25.9));//四舍五入 26
+			console.log(Math.round(25.1));//四舍五入 25
+			
+			console.log(Math.floor(Math.random() * 10 + 1));//1 - 10
+			
+			function selectFrom(low, up){
+				var choices = up - low + 1;
+				return Math.floor(Math.random() * choices + low);
+			}
+			
+			console.log(selectFrom(2,10));
+			
+			var colors = ['red', 'blue', 'yellow', 'black'];
+			console.log(colors[selectFrom(0,colors.length -1 )]);//数组内随机
+			
+			
+			
+		</script>
+	</body>
+</html>
