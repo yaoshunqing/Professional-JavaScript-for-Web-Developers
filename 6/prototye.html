@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				background-color: black;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//使用原型对象的好处是可以让所有对象实例共享它所包含的属性和方法
+			function Person(){}
+			Person.prototype.name = 'Nao';
+			Person.prototype.age = 23;
+			Person.prototype.sayName = function(){
+				console.log(this.name);
+			}
+			
+			var person1 = new Person();
+			var person2 = new Person();
+			console.log(person1.age);
+			person2.sayName();
+			person1.sayName();//Nao
+			
+			console.log(Person.prototype.isPrototypeOf(person1));//true
+			console.log(Object.getPrototypeOf(person1) == Person.prototype);//true
+			
+			person1.name = 'Yao';
+			console.log(person1.name);//Yao
+			console.log("name" in person1);//true
+			
+			delete person1.name;
+			console.log(person1.name);//Nao
+			console.log(person1.hasOwnProperty("name"));//false 
+			console.log("name" in person1);//true
+			
+			var o = {
+				toString: ()=>{
+					return "My object";
+				}
+			};
+			for(var prop in o){
+				if (prop == "toString"){
+					console.log("hah");
+				}
+			}
+			
+			var keys = Object.keys(Person.prototype);
+			//console.log(keys);//["name","age","sayName"]
+			
+			//这样写等于设置成了新对象，constructor也变成了新对象（Object）的constructor
+			Person.prototype = {
+				'name':'Nao',
+				'age':23
+			}
+			var friend = new Person();
+			console.log(friend.constructor == Person);//false
+			console.log(friend.constructor == Object);//true
+			
+			
+			//原型的动态性让对象的任何修改都能立即从实例上反映出来
+			var friend = new Person();
+			Person.prototype.sayHi = ()=>{
+				console.log('hi');
+			}			
+			friend.sayHi();//hi
+			
+			//可以随时添加属性和方法，并且修改能够立即体现出来，但如果重写整个原型对象，就不一样了
+			function Person(){
+			}
+			var friend = new Person();
+			Person.prototype = {
+				constructor:Person,
+				name:'nao',
+				sayName:()=>{
+					console.log(this.name);
+				}
+				
+			};
+			friend.sayName();//friend.sayName is not a function at prototye.html:84
+			//重写原型会切断现有原型与之前存在对象实例之间的联系；
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

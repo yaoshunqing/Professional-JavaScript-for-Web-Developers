@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				background-color: black;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function createPerson(name, age, job){
+				var o = new Object();
+				o.name = name;
+				o.age = age;
+				o.job = job;
+				o.sayName = function(){
+					console.log(this.name);
+				};
+				return o;
+			}
+			
+			var person1 = createPerson('Yao', 23, 'Engineer');
+			
+			//自己创建构造函数
+			function Person(name, age, job){
+				this.name = name;
+				this.age = age;
+				this.job = job;
+				this.sayName = function(){
+					console.log(this.name);
+				};
+			}
+			//任何函数只要通过new来调用都可以作为构造函数
+			var person0 = new Person('yao', 23, 'Engineer');
+			//console.log(person0);// {"age":23,"job":"Engineer","name":"yao","sayName":"fu...
+			console.log(person0 instanceof Person);//true
+			console.log(person0 instanceof Object);//true
+			
+			//在另一个对象作用域调用
+			var o = new Object();
+			Person.call(o, 'Yao', 23, 'Engineer');
+			o.sayName();//Yao
+			
+			console.log(o.sayName == person0.sayName);//false每次创建一个person实例都会新建一个函数类
+			
+			//所以通常这样做
+			// function sayName(){
+			// 	console.log(this.name);
+			// }
+			// function Person(name, age, job){
+			// 	this.name = name;
+			// 	this.age = age;
+			// 	this.job = job;
+			// 	this.sayName = sayName;
+			// }
+			
+			
+		</script>
+	</body>
+</html>

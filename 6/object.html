@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				background-color: black;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//注意对象类属性名加不加引号都可以
+			var person = {
+				'name': 'Nao',
+				'age': 23,
+				'job': 'engineer',
+				'sayName': function() {
+					console.log(this.name);
+				}
+			}
+			person.sayName();
+			Object.defineProperty(person, 'job',{
+				enumerable:false,
+				// configurable:false
+			});
+			// delete person.job;
+			for(var i in person){
+				console.log(i);//没有job
+			}
+
+			//使用object.defineProperty修改对象数据属性
+			var person = {};
+			Object.defineProperty(person, 'name', {
+				writable: false,
+				value: "Nicholas"
+			});
+			// Object.defineProperties(person, {
+			// 	'name': {
+			// 		writable: false,
+			// 		value: "Nicholas",
+			// 	}
+			// }, {
+			// 	'per': {
+			// 		writable: false,
+			// 		value: "Nicholas",
+			// 	}
+			// });
+			console.log(person.name);//Nicholas
+			person.name = 'Nao';
+			console.log(person.name);//Nicholas
+			
+			var book = {
+				_year: 2020,
+				edition:1
+			};
+			
+			Object.defineProperty(book,'year',{
+				get:function(){
+					return this._year;
+				},
+				set: function(newValue){
+					if (newValue > 2004){
+						this._year = newValue;
+						this.edition += 1;
+					}
+				}
+			});
+			book.year = 2021;
+			console.log(book.edition);//2
+			console.log(book._year);//2021
+			
+			var descriptor = Object.getOwnPropertyDescriptor(book, '_year');
+			console.log(descriptor);//{"configurable":true,"enumerable":true,"value":2021,"writable":true}
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>
